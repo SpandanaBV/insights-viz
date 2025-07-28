@@ -1,11 +1,22 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import { MetricsOverview } from "@/components/dashboard/MetricsOverview";
+import { ChartsSection } from "@/components/dashboard/ChartsSection";
+import { DataTableSection } from "@/components/dashboard/DataTableSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto p-6 space-y-8">
+        <DashboardHeader />
+        <div className="animate-slide-up">
+          <MetricsOverview />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <ChartsSection />
+        </div>
+        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          <DataTableSection />
+        </div>
       </div>
     </div>
   );

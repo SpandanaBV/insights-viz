@@ -2,26 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ADmyBRAND Insights Design System - Professional Analytics Theme */
 
 @layer base {
   :root {
+    /* Analytics Brand Colors */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
+    
+    /* Brand Primary - Professional Blue */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 100% 70%;
+    --primary-dark: 217 91% 50%;
+    
+    /* Brand Secondary - Tech Purple */
+    --secondary: 259 100% 65%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Analytics Accent Colors */
+    --accent-success: 142 76% 36%;
+    --accent-warning: 38 92% 50%;
+    --accent-danger: 0 84% 60%;
+    --accent-info: 199 89% 48%;
+    
+    /* Dashboard Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(259 100% 65%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 14% 96%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(160 84% 39%));
+    --gradient-chart: linear-gradient(180deg, hsl(217 91% 60% / 0.1), hsl(217 91% 60% / 0));
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(220 14% 96% / 0.1), 0 2px 4px -1px hsl(220 14% 96% / 0.06);
+    --shadow-hover: 0 10px 15px -3px hsl(217 91% 60% / 0.1), 0 4px 6px -2px hsl(217 91% 60% / 0.05);
+    --shadow-glow: 0 0 0 1px hsl(217 91% 60% / 0.05), 0 0 20px hsl(217 91% 60% / 0.1);
+    
+    /* Surfaces */
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
+    --card-elevated: 0 0% 100%;
+    
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -101,5 +123,70 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Dashboard Components */
+  .metric-card {
+    @apply bg-card border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  .metric-card-elevated {
+    @apply bg-card-elevated shadow-lg hover:shadow-xl border border-border/50;
+  }
+  
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Animations */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
