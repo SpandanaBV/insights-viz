@@ -5,18 +5,16 @@ import { DataTableSection } from "@/components/dashboard/DataTableSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto p-6 space-y-8">
-        <DashboardHeader />
-        <div className="animate-slide-up">
-          <MetricsOverview />
-        </div>
-        <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <ChartsSection />
-        </div>
-        <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <DataTableSection />
-        </div>
+    <div id="dashboard-content" className="space-y-8">
+      <DashboardHeader />
+      <div className="animate-slide-up">
+        <MetricsOverview />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <ChartsSection />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <DataTableSection />
       </div>
     </div>
   );

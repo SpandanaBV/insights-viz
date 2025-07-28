@@ -1,47 +1,54 @@
 import { MetricCard } from "@/components/ui/metric-card";
-import { DollarSign, Users, Target, TrendingUp } from "lucide-react";
+import { MetricCardSkeleton } from "@/components/ui/loading-skeleton";
+import { useMetricsData } from "@/hooks/use-api-data";
+import { DollarSign, Users, ShoppingCart, TrendingUp } from "lucide-react";
 
 export const MetricsOverview = () => {
+  const { metrics } = useMetricsData();
+
+  const metricsConfig = [
+    {
+      title: "Total Revenue",
+      value: metrics.revenue.value,
+      change: metrics.revenue.change,
+      trend: metrics.revenue.trend,
+      icon: DollarSign,
+      gradient: "primary" as const,
+    },
+    {
+      title: "Active Users",
+      value: metrics.users.value,
+      change: metrics.users.change,
+      trend: metrics.users.trend,
+      icon: Users,
+      gradient: "info" as const,
+    },
+    {
+      title: "Conversions",
+      value: metrics.conversions.value,
+      change: metrics.conversions.change,
+      trend: metrics.conversions.trend,
+      icon: ShoppingCart,
+      gradient: "warning" as const,
+    },
+    {
+      title: "Growth Rate",
+      value: metrics.growth.value,
+      change: metrics.growth.change,
+      trend: metrics.growth.trend,
+      icon: TrendingUp,
+      gradient: "success" as const,
+    },
+  ];
+
   return (
     <section className="space-y-6">
       <h2 className="text-2xl font-semibold text-foreground">Key Metrics</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <MetricCard
-          title="Total Revenue"
-          value="$847,521"
-          change="+12.5%"
-          trend="up"
-          icon={DollarSign}
-          gradient="primary"
-        />
-        
-        <MetricCard
-          title="Active Users"
-          value="24,847"
-          change="+8.3%"
-          trend="up"
-          icon={Users}
-          gradient="info"
-        />
-        
-        <MetricCard
-          title="Conversions"
-          value="3,247"
-          change="+15.7%"
-          trend="up"
-          icon={Target}
-          gradient="success"
-        />
-        
-        <MetricCard
-          title="Growth Rate"
-          value="23.4%"
-          change="+2.1%"
-          trend="up"
-          icon={TrendingUp}
-          gradient="warning"
-        />
+        {metricsConfig.map((metric, index) => (
+          <MetricCard key={index} {...metric} />
+        ))}
       </div>
     </section>
   );

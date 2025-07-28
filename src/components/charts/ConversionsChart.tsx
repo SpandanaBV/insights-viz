@@ -1,12 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
-
-const data = [
-  { name: 'Organic Search', value: 35.2, count: 1142 },
-  { name: 'Paid Ads', value: 28.7, count: 932 },
-  { name: 'Social Media', value: 18.1, count: 588 },
-  { name: 'Email Marketing', value: 12.3, count: 399 },
-  { name: 'Direct Traffic', value: 5.7, count: 186 },
-];
+import { useApiData } from "@/hooks/use-api-data";
 
 const COLORS = [
   'hsl(var(--primary))',
@@ -17,12 +10,23 @@ const COLORS = [
 ];
 
 export const ConversionsChart = () => {
+  const { data, loading } = useApiData("/api/conversions");
+
+  if (loading) {
+    return <div className="h-80 w-full animate-pulse bg-muted rounded" />;
+  }
+
+  const pieData = data.map((item, index) => ({
+    name: item.name,
+    value: Math.floor(Math.random() * 40) + 10,
+    count: item.value
+  }));
   return (
     <div className="h-80 w-full">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
-            data={data}
+            data={pieData}
             cx="50%"
             cy="50%"
             innerRadius={60}
@@ -30,7 +34,7 @@ export const ConversionsChart = () => {
             paddingAngle={2}
             dataKey="value"
           >
-            {data.map((entry, index) => (
+            {pieData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>

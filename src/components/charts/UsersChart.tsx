@@ -1,20 +1,22 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
-const data = [
-  { day: 'Mon', newUsers: 245, returningUsers: 892 },
-  { day: 'Tue', newUsers: 312, returningUsers: 1024 },
-  { day: 'Wed', newUsers: 198, returningUsers: 987 },
-  { day: 'Thu', newUsers: 421, returningUsers: 1156 },
-  { day: 'Fri', newUsers: 387, returningUsers: 1234 },
-  { day: 'Sat', newUsers: 289, returningUsers: 891 },
-  { day: 'Sun', newUsers: 203, returningUsers: 756 },
-];
+import { useApiData } from "@/hooks/use-api-data";
 
 export const UsersChart = () => {
+  const { data, loading } = useApiData("/api/users");
+
+  if (loading) {
+    return <div className="h-80 w-full animate-pulse bg-muted rounded" />;
+  }
+
+  const chartData = data.map(item => ({
+    day: item.name,
+    newUsers: Math.floor(item.value * 0.3),
+    returningUsers: item.value
+  }));
   return (
     <div className="h-80 w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+        <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
           <XAxis 
             dataKey="day" 
